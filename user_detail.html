@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit" />
+    <link rel="icon" href="">
+    <title>用户详情 -- Gimi叽咪</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css">
+    
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/checkbix.min.css">
+    <!--date-->
+    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <link rel="stylesheet" href="css/flatpickr.confetti.min.css">
+    <link rel="stylesheet" href="css/gimi.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section>
+        <!--左侧边栏-->
+        <div class="left-side">
+            <!--logo-->
+            <div class="logo-icon">
+                <a href=""><img src="images/gimi-logo.png" alt=""></a>
+            </div>
+            <!--nav-->
+            <div class="nav-side">
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li>
+                        <div class="nav-line"></div><a href="index.html"><i class="sj-icon"></i> <span>数据统计</span></a></li>
+                    <li class="active">
+                        <div class="nav-line"></div>
+                        <a href="user_control.html"><i class="yh-icon"></i> <span>用户管理</span></a>
+                        <div class="num-icon">500</div>
+                    </li>
+                    <li class="menu-list">
+                        <div class="nav-line"></div>
+                        <a href=""><i class="wz-icon"></i> <span>文章管理</span></a>
+                        <ul class="sub-menu-list">
+                            <li><a href="post_control.html"> 文章管理</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                            <li><a href="comment_control.html"> 评论管理</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                            <li><a href="tag_control.html"> 标签管理</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-list">
+                        <div class="nav-line"></div>
+                        <a href=""><i class="sp-icon"></i> <span>商品管理</span></a>
+                        <ul class="sub-menu-list">
+                            <li><a href="general_control.html"> 普通商品</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                            <li><a href="int_control.html"> 积分商品</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                            <li><a href="experience_control.html"> 线下体验</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                            <li><a href="class_control.html"> 分类管理</a>
+                                <div class="num-icon">500</div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="nav-line"></div><a href="order_control.html"><i class="dd-icon"></i> <span>订单管理</span></a>
+                        <div class="num-icon">500</div>
+                    </li>
+                    <li>
+                        <div class="nav-line"></div><a href="push_control.html"><i class="xx-icon"></i> <span>消息推送</span></a>
+                        <div class="num-icon">500</div>
+                    </li>
+                    <li>
+                        <div class="nav-line"></div><a href=""><i class="jt-icon"></i> <span>静态信息</span></a>
+                        <div class="num-icon">500</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--右边主体内容-->
+        <div class="main">
+            <!--头部-->
+            <div class="main-header">
+                <span id="Clock"></span>
+                <div class="user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/user.png" alt="" />
+                            admin
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="#"><i class="fa fa-user"></i>  个人资料</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i>  设置</a></li>
+                        <li><a href="#"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--内容-->
+            <div class="main-content">
+                <div class="main-nav">
+                    <ol class="breadcrumb">
+                        <li><a href="#">用户管理</a></li>
+                        <li class="active">编辑用户</li>
+                        <li><a href="user_control.html" class="btn btn-xs btn-white">返回上级</a></li>
+                    </ol>
+                </div>
+
+                <div class="content">
+                    <div class="content-header">
+                        <div class="content-title">
+                            <ul class="list-inline">
+                                <li class="active"><a data-toggle="tab" href="#tab1">基本信息</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade in active tab">
+                            <form id="userEdit" enctype=”multipart/form-data” >
+                                <table class="table table-bordered edit-table">
+                                    <tr>
+                                        <td>用户名：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-sm" name="nickname" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>性别：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="sex1" name="sex" value="男"> 男
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="sex0" name="sex" value="女"> 女
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>头像：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="img-list" id="title-img">
+                                                    <div class="change-title">
+                                                        <input type="file" class="" multiple >
+                                                    </div>
+                                                    <img src="images/img1.png" alt="">
+                                                </div>
+                                                <span id="upImg">请上传头像！</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户ID：</td>
+                                        <td class="gray-text">28291293</td>
+                                    </tr>
+                                    <tr>
+                                        <td>生日：</td>
+                                        <td>
+                                            <div class="form-group">
+                                            <input id="date-birthday" name="birth" class="flatpickr form-control input-sm" data-date-format="Y-m-d">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>所在地：</td>
+                                        <td>
+                                            <div class="form-group">
+                                            <input type="text" name="location" class="form-control input-sm" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>个人简介：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="intro" cols="20" rows="5"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>积分：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="score_num" class="form-control input-sm" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>热度：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="hot_num" class="form-control input-sm" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!--<tr>
+                                        <td>账号：</td>
+                                        <td>
+                                            <input type="text" name="userId" class="form-control input-sm" value="">
+                                        </td>
+                                    </tr>-->
+                                    <tr>
+                                        <td>密码：</td>
+                                        <td>
+                                            <div class="form-group">
+                                            <input type="text" name="pwd" class="form-control input-sm" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>注册时间：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input id="date-reg" name="register_time" data-enable-time=true  data-time_24hr=true class="flatpickr form-control input-sm">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>手机号：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" name="phone" class="form-control input-sm" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>状态：</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="radio-inline text-green">
+                                                    <input type="radio" id="state1" name="state"  value="1" > 正常
+                                                </label>
+                                                <label class="radio-inline text-red">
+                                                    <input type="radio" id="state0" name="state"  value="0"> 禁用
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="edit-btn">
+                                    <button type="submit" class="btn btn-purple active btn-block">保存</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--JS-->
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery-1.12.4.min.js"><\/script>')
+    </script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/checkbix.min.js"></script>
+    <script src="js/tableSort.js"></script>
+    <script src="js/nomoJS.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="js/gimiValidation.js"></script>
+    <!--date-->
+    <script src="js/flatpickr.min.js"></script>
+    <script src="js/flatpickr.l10n.zh.js"></script>
+    <script src="js/userEditPort.js"></script>
+    <script src="js/gimi.js"></script>
+    <script>
+        $('#date-birthday').flatpickr();
+        $('#date-reg').flatpickr();
+        
+        
+    </script>
+</body>
+
+</html>

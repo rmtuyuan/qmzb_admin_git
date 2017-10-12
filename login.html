@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit" />
+    <link rel="icon" href="">
+    <title>全民直播后台管理系统-家族信息</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/gimi.css">
+    <link rel="stylesheet" href="css/my_style.css">
+    <link rel="stylesheet" href="css/checkbix.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html, body {
+             height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+               background: url("images/bgimg.jpg") no-repeat;
+                 background-size: 100%;
+        }
+        body {
+            background: url("images/bgimg.jpg") no-repeat;
+          
+            color: #fff;
+          
+        }
+
+        .login-main {
+            margin: 100px auto;
+            width: 50%;
+        }
+
+        .login-main>h2 {
+
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .input-col {
+            margin: 20px 0;
+        }
+
+        .input-col>label {
+            width: 225px;
+            text-align: right;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .login-btn-box>a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #369;
+        }
+
+        .input-col>input,
+        .login-btn-box>a {
+            height: 40px;
+            width: 240px;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #369;
+            padding-left: 5px;
+        }
+
+        .login-btn-box {
+            display: flex;
+        }
+
+        .login-btn-box>label {
+            visibility: hidden;
+            margin-right: 10px;
+        }
+
+        a {
+            color: #fff;
+        }
+
+        #pin_number {
+            width: 155px;
+        }
+
+        .get-pin-btn {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #999;
+            height: 40px;
+            width: 80px;
+            margin-left: 5px;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #369;
+            padding-left: 5px;
+        }
+
+        .get-pin-btn.actived {
+            background: #369;
+        }
+
+        .login-btn-box>a.actived {
+            background: #999;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-main">
+        <h2>全民直播后台管理系统</h2>
+        <div class="input-col">
+            <label for="login_phone">手机号:</label>
+            <input type="number" name="phone_number" id="login_phone">
+
+        </div>
+        <div class="input-col atte-form-con-col" style="display:flex;">
+            <label for="pin_number" style="margin-right:10px;">验证码:</label>
+            <input type="text" name="pin_number" id="pin_number">
+            <a href="#" id="get_sms_code" class="get-pin-btn actived">获取验证码</a>
+        </div>
+        <div class="input-col login-btn-box">
+            <label for="" class="">登录</label>
+            <a href="#">登录</a>
+        </div>
+    </div>
+
+    <div class="modal-info">
+        <div class="modal-content">
+            <div class="other-modal-info">
+                <p class="info-text" style="color:#333;">
+
+                </p>
+                <p>
+                    <a href="#" class="info-sure info-sure-2">确定</a>
+
+                </p>
+            </div>
+
+        </div>
+        <div class="close-modal">
+
+        </div>
+    </div>
+
+    <!--JS-->
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery-1.12.4.min.js"><\/script>')
+    </script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/checkbix.min.js"></script>
+    <script src="js/tableSort.js"></script>
+    <script src="js/nomoJS.js"></script>
+    <script src="js/gimi.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/jz_admin.js"></script>
+    <script>
+        $(function () {
+            $(".radio-box input").click(function () {
+                $("." + $(this).data("item")).show().siblings(".img-file-box-con").hide();
+            });
+
+            //调用 公告init()
+            //Public_notice.init();
+            var phone_reg = /^1[34578]\d{9}$/;
+            $("#login_phone").blur(function () {
+                var phone_val = $(this).val();
+                if (!phone_reg.test(phone_val)) {
+                    //格式错误
+                    showInfo("手机号格式错误");
+                    $(this).removeClass("actived");
+                    $(this).addClass("erroed");
+
+                } else {
+                    $(this).addClass("actived");
+                    $(this).removeClass("erroed");
+                }
+            });
+            $("#login_phone").keyup(function () {
+                var phone_val = $(this).val();
+                if (phone_val.length >= 11) {
+                    if (!phone_reg.test(phone_val)) {
+                        $(this).removeClass("actived");
+                        $(this).addClass("erroed");
+                    } else {
+                        $(this).addClass("actived");
+                        $(this).removeClass("erroed");
+                    }
+
+                }
+            });
+
+            $(".atte-form-con-col").on("click", "a#get_sms_code.actived", function (e) {
+                e.preventDefault();
+                var a_get_sms = $(this);
+                var phone_reg = /^1[34578]\d{9}$/;
+                if ($("#login_phone").hasClass("actived") && phone_reg.test($("#login_phone").val())) {
+                    //手机号正确
+                    var form_2 = new FormData();
+                    form_2.append("mobile", $("#login_phone").val());
+                    fetch(server + "/sms/send", {
+                        method: 'POST',
+                        //headers: myHeaders,
+                        mode: 'cors',
+                        cache: 'default',
+                        body: form_2
+                    }).then((response) => response.json()).then(function (data) {
+
+                        if (data.code == 200) {
+                            //成功后 
+                            var time_num = 60;
+                            a_get_sms.removeClass("actived");
+                            a_get_sms.find('span').removeClass("text-color-fe").html(time_num +
+                                "s");
+                            var timer = setInterval(function () {
+                                a_get_sms.html(--time_num + "s");
+                                if (time_num <= 0) {
+                                    clearInterval(timer);
+                                    timer = null;
+                                    a_get_sms.addClass("actived").find('span').addClass(
+                                        "text-color-fe").html("获取验证码");
+                                }
+                            }, 1000);
+                        } else {
+
+                            showInfo('当前网络不稳定,请重新获取');
+                        }
+
+                    });
+                } else {
+                    //手机号不正确
+                    showInfo("手机号格式错误");
+                }
+
+            });
+
+
+            $("#all_submit_btn").click(function (e) {
+                e.preventDefault();
+                // 判断是否都填写完成 
+
+                if ($("input").length == $("input.actived").length) {
+                    //都填了 fetch   跳转
+                    var form_2 = new FormData();
+                    for (var j = 0; j < $(" input.actived").length; j++) {
+                        var element = $($(" input.actived")[j]);
+                        form_2.append(element.attr("name"), element.val()); // 
+                    }
+                  
+                    fetch(server + "/user/authentication", {
+                        method: 'POST',
+                        //headers: myHeaders,
+                        mode: 'cors',
+                        cache: 'default',
+                        body: form_2
+                    }).then((response) => response.json()).then(function (data) {
+                        if (data.code == 200) {
+                            // 成功 跳转网页
+                            alert("提交成功");
+                            login_uid=data.data.uid
+                            //设置 cookie
+                    //           $.cookie(cookie_name, login_uid, {
+                    //     expires: 3
+                    // });
+                            window.location.href = "public_notice.html?item=nav-line-5"
+
+                        } else if (data.code == 400) {
+                            showInfo(data.message);
+                        } else {
+                            showInfo('当前网络不稳定,提交失败,请重新提交');
+                        }
+
+                    });
+
+
+                } else {
+                   
+                        //其他没填写
+                        showInfo($($("input.erroed")[0]).siblings("p").html() + "没填写");
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
