@@ -245,18 +245,8 @@
                             </tr>
                         </tbody>
                     </table>
-                      <div class="content-footer">
-                        <div class="page-text">
-                            当前显示 <span id="page-star">1</span> 到 <span id="page-end">9</span> 条，共 <span id="page-all">12</span>                            条记录。
-                        </div>
-                        <div class="page-btn">
-                            <a href="" class="btn btn-yellow">上一页</a>
-                            <a href="" class="btn btn-yellow active">1</a>
-                            <a href="" class="btn btn-yellow">2</a>
-                            <a href="" class="btn btn-yellow">3</a>
-                            <a href="" class="btn btn-yellow">4</a>
-                            <a href="" class="btn btn-yellow">下一页</a>
-                        </div>
+                      <div class="content-footer box">
+                       
                     </div>
                 </div>
             </div>
@@ -298,6 +288,11 @@
     <script src="js/tableSort.js"></script>
     <script src="js/nomoJS.js"></script>
     <script src="js/gimi.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/paging.js"></script>
+    <script src="js/jz_admin.js"></script>
+
     <script>
         $(function () {
             $(".radio-box input").click(function () {
@@ -315,6 +310,10 @@
                 e.preventDefault();
                 $('.modal-log-box').hide();
             });
+
+
+              Membership.DataLoad(1);
+               Membership.pagesFuc();
         });
     </script>
 

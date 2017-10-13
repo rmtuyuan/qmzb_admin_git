@@ -42,6 +42,9 @@ function openHref(url) {
 //家族 后台功能
 //登录成功后 获取 
 //公众功能
+
+
+
 var login_uid = null; //uid
 var server = "http://192.168.1.4:8081//"; //http:
 var Comment = {
@@ -589,6 +592,8 @@ var Family_msg_done = {
     }
 };
 
+//分页
+
 //成员管理 
 var Membership = {
     init: function () {
@@ -597,12 +602,11 @@ var Membership = {
     searchSome: function () {
         //上面搜索框
     },
-    DataLoad: function () {
-        //数据加载
-
-         var form = new FormData();
-       //  page=1     familyid=1
-         login_uid=1;
+    li_length:null,
+    pagesFuc:function () {  
+           var form = new FormData();
+        //  page=1     familyid=1
+        login_uid = 1;
         form.append("familyid", login_uid); // 
         form.append("page", 1); // 
         fetch(server + "check/getCheckAnchorList", {
@@ -615,19 +619,84 @@ var Membership = {
         }).then((response) => response.json()).then(function (data) {
             //console.log(data);
             if (data.code == 200) {
-              console.log(data);
-              var tr_fram=document.createDocumentFragment();
               
-              for (var i = 0; i < data.data.list.length; i++) {
-                  var element = data.data.lis[i];
-                  var tr=document.createElement("tr");
-                  $(tr).html(
-                      
-                  );
-                  
-              }
+                var li_leng = data.data.list.length;
+                  var li_leng = data.data.list.length;
+                //分页
+                var setTotalCount = li_leng;
+                var all_pages=parseInt(li_leng%20==0?li_leng/20:li_leng/20+1);
+                $('.content-footer').paging({
+                    initPageNo: 1, // 初始页码
+                    totalPages: all_pages, //总页数
+                    totalCount: '合计' + setTotalCount + '条数据', // 条目总数
+                    slideSpeed: 600, // 缓动速度。单位毫秒
+                    jump: false, //是否支持跳转
+                    callback: function (page) { // 回调函数
+                      //刷新页面
+                      //console.log(page)
+                        Membership.DataLoad(page);
+                    }
+                });
+
+
             }
         });
+        
+    },
+    DataLoad: function (page_number) {
+        //数据加载 分页   
+
+
+        var form = new FormData();
+        //  page=1     familyid=1
+        login_uid = 1;
+        form.append("familyid", login_uid); // 
+        form.append("page", page_number); // 
+        fetch(server + "check/getCheckAnchorList", {
+            method: 'POST',
+            //      headers: { 'Accept': 'application/json',
+            //      'Content-Type': 'application/json'},
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        }).then((response) => response.json()).then(function (data) {
+            //console.log(data);
+            if (data.code == 200) {
+                var tr_fram = document.createDocumentFragment();
+                var li_leng = data.data.list.length;
+
+
+
+                for (var i = 0; i < li_leng; i++) {
+                    var element = data.data.list[i];
+                    var tr = document.createElement("tr");
+                    $(tr).html(
+                        `
+                                <td>0001</td>
+                              
+                                <td>222222</td>
+                                <td>男的范德萨</td>
+                                <td>1990-02-01</td>
+                               
+                                <td class="color-blue"><a href="anchor_msg.html?item=nav-line-11">查看</a></td>
+                                <td>1991-02-01</td>
+                                <td class="text-blue">23</td>
+                                
+                              
+                                <td class="membership-edit">
+                                    
+                                    
+                                      <a href="#" data-showmodal='agree-people-modal' class="user-edit" style="font-size:14px;">同意</a>
+                                    <a  class="user-edit" data-showmodal='not-agree-people-modal' style="font-size:14px;">驳回</a>
+                                          
+                                </td>`
+                    );
+
+                }
+
+            }
+        });
+
 
     },
     ClickSearch: function () {
@@ -654,18 +723,18 @@ var Membership = {
         }).then((response) => response.json()).then(function (data) {
             //console.log(data);
             if (data.code == 200) {
-                $(".img-logo-src").attr("src",data.data.icon);
+                $(".img-logo-src").attr("src", data.data.icon);
                 $('.number-in').html(data.data.number);
                 $('.nickName-in').html(data.data.nickName);
                 $(".mobile-in").html(data.data.mobile);
 
-                $(".img-logo-src").attr("src",data.data.icon);
-                $('.gender-in').html(data.data.userAuthentication.gender==0?"保密":data.data.userAuthentication.gender==1?"男":"女");
+                $(".img-logo-src").attr("src", data.data.icon);
+                $('.gender-in').html(data.data.userAuthentication.gender == 0 ? "保密" : data.data.userAuthentication.gender == 1 ? "男" : "女");
                 $('.age-in').html(data.data.userAuthentication.age);
                 $(".realName-in").html(data.data.userAuthentication.realName);
                 $(".idCard-in").html(data.data.userAuthentication.idCard);
-                $(".picIdFront-in").css("background"," url("+data.data.userAuthentication.picIdFront+") no-repeat");
-                $(".picIdBack-in").css("background"," url("+data.data.userAuthentication.picIdBack+") no-repeat");
+                $(".picIdFront-in").css("background", " url(" + data.data.userAuthentication.picIdFront + ") no-repeat");
+                $(".picIdBack-in").css("background", " url(" + data.data.userAuthentication.picIdBack + ") no-repeat");
             }
         });
     },

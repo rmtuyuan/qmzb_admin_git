@@ -1,5 +1,3 @@
-
-
 (function ($) {
     //获取url参数的封装函数
     //decodeURI() 和 decodeURIComponent()
@@ -23,31 +21,58 @@
 })(jQuery);
 
 (function () {
-          $(".left-side").load('left_side.html',function () {  
-              var item_active=$.getUrlParam("item");
-              $("."+item_active).addClass("active").siblings("li").removeClass('active');
-                var leng=$("li.active").attr("class").split(" ")[0].split("-")[2];
-             
-              if(leng>12){
-                 $('.left-side').scrollTop( $('.left-side')[0].scrollHeight );
-              }
-          });
-           $(".main-header").load('main_header.html',function () {  
-             
-                  format(new Date());
-              
-                  if($("#Clock_2").length>0){
-                        format2(new Date());
-                  }
-                  $(".quit-login").click(function () {
-                      //退出登录
-                      //清除缓存
-                      window.location.href="login.html";
+    $(".left-side").load('left_side.html', function () {
+        var item_active = $.getUrlParam("item");
+        if ( $("." + item_active).parent("ul").hasClass("sub-menu-list")) {
+            $("." + item_active).parent("ul").parent("li.menu-list").addClass("nav-active").siblings("li").removeClass('active');
+            $("." + item_active).addClass("active").siblings("li").removeClass('active');
+        }else{
+           $("." + item_active).addClass("active").siblings("li").removeClass('active');
+        }
+        var leng = $("li.active").attr("class").split(" ")[0].split("-")[2];
 
-                  })
-                  //加载时间 和头像
-             
-           });
+        if (leng > 12) {
+            $('.left-side').scrollTop($('.left-side')[0].scrollHeight);
+        }
+
+        $('.menu-list > a').click(function () {
+
+            var parent = $(this).parent();
+            var sub = parent.find('> ul');
+            if (sub.is(':visible')) {
+                sub.slideUp(200, function () {
+                    parent.removeClass('nav-active');
+                    //    $('.main-content').css({height: ''});
+                    //    mainContentHeightAdjust();
+                });
+            } else {
+                visibleSubMenuClose();
+                parent.addClass('nav-active');
+                sub.slideDown(200, function () {
+                    // mainContentHeightAdjust();
+                });
+            }
+            return false;
+        });
+
+
+    });
+    $(".main-header").load('main_header.html', function () {
+
+        format(new Date());
+
+        if ($("#Clock_2").length > 0) {
+            format2(new Date());
+        }
+        $(".quit-login").click(function () {
+            //退出登录
+            //清除缓存
+            window.location.href = "login.html";
+
+        })
+        //加载时间 和头像
+
+    });
     // 左侧开关按钮
     $('.menu-list > a').click(function () {
 
@@ -109,30 +134,30 @@
             }
         }
     }
-    
+
     // 图片添加
-    $('#imgs-add>input').change(function(e){
+    $('#imgs-add>input').change(function (e) {
         var file = this.files[0];
         var imgPath = $(this).val();
         if (imgPath == "") {
             return false;
-        }else{
+        } else {
             var imgUrl = window.URL.createObjectURL(this.files[0]);
         }
-        if(!/image\/\w+/.test(file.type)){
+        if (!/image\/\w+/.test(file.type)) {
             alert("请确保文件为图像类型");
             return false;
         }
-        if(file.size > 2000000){
+        if (file.size > 2000000) {
             alert('图片过大,不得超过2M！');
             return false;
         }
-        var imgs_html = '<div class="img-cover"><span></span><img src="'+imgUrl+'" width="109px" height="109px" alt=""></div>';
+        var imgs_html = '<div class="img-cover"><span></span><img src="' + imgUrl + '" width="109px" height="109px" alt=""></div>';
         $("#imgs-add").before(imgs_html);
 
         $(".img-cover").on("click", "span", function () {
             $(this).parent(".img-cover").remove();
-         });
+        });
     });
     // 图片删除
     $(".img-cover").on("click", "span", function () {
@@ -140,28 +165,28 @@
     });
 
     // 图片添加
-    $('#imgs-add-content>input').change(function(e){
+    $('#imgs-add-content>input').change(function (e) {
         var file = this.files[0];
         var imgPath = $(this).val();
         if (imgPath == "") {
             return false;
-        }else{
+        } else {
             var imgUrl = window.URL.createObjectURL(this.files[0]);
         }
-        if(!/image\/\w+/.test(file.type)){
+        if (!/image\/\w+/.test(file.type)) {
             alert("请确保文件为图像类型");
             return false;
         }
-        if(file.size > 2000000){
+        if (file.size > 2000000) {
             alert('图片过大,不得超过2M！');
             return false;
         }
-        var imgs_html = '<div class="img-cover"><span></span><img src="'+imgUrl+'" width="109px" height="109px" alt=""></div>';
+        var imgs_html = '<div class="img-cover"><span></span><img src="' + imgUrl + '" width="109px" height="109px" alt=""></div>';
         $("#imgs-add-content").before(imgs_html);
 
         $(".img-cover").on("click", "span", function () {
             $(this).parent(".img-cover").remove();
-         });
+        });
     });
     // 图片删除
     $(".img-cover").on("click", "span", function () {
@@ -177,7 +202,7 @@
             selectAll('user-contorl', 'notAll');
         }
     });
-     // 用户管理全选
+    // 用户管理全选
     $('#postAll-mycheckbox').change(function () {
         if (this.checked == true) {
             selectAll('post-contorl', 'all');
@@ -185,7 +210,7 @@
             selectAll('post-contorl', 'notAll');
         }
     });
-     // 评论管理全选
+    // 评论管理全选
     $('#commentAll-mycheckbox').change(function () {
         if (this.checked == true) {
             selectAll('comment-contorl', 'all');
@@ -193,7 +218,7 @@
             selectAll('comment-contorl', 'notAll');
         }
     });
-      // 标签管理全选
+    // 标签管理全选
     $('#tagAll-mycheckbox').change(function () {
         if (this.checked == true) {
             selectAll('tag-contorl', 'all');
@@ -201,7 +226,7 @@
             selectAll('tag-contorl', 'notAll');
         }
     });
-      // 标签管理全选
+    // 标签管理全选
     $('#orderAll-mycheckbox').change(function () {
         if (this.checked == true) {
             selectAll('order-contorl', 'all');
@@ -209,7 +234,7 @@
             selectAll('order-contorl', 'notAll');
         }
     });
-        // 标签管理全选
+    // 标签管理全选
     $('#pushAll-mycheckbox').change(function () {
         if (this.checked == true) {
             selectAll('push-contorl', 'all');
@@ -218,21 +243,21 @@
         }
     });
     // 普通商品的select颜色
-    $('.shop-select>select').change(function(){
+    $('.shop-select>select').change(function () {
         var selectVal = $(this).val();
-        if(selectVal=='online'){
+        if (selectVal == 'online') {
             $(this).removeClass('text-yellow').addClass('text-green');
 
-        }else if(selectVal=='offline'){
+        } else if (selectVal == 'offline') {
             $(this).removeClass('text-green').addClass('text-yellow');
         }
     });
     // 颜色色值
-    $('#color-num').blur(function(){
+    $('#color-num').blur(function () {
         var colorNum = $(this).val();
-        $(this).siblings('.color-span').css('background',colorNum);
+        $(this).siblings('.color-span').css('background', colorNum);
     });
-    
+
     Checkbix.init();
     // 表格排序
     TableSort();

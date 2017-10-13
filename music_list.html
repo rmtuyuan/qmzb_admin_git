@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit" />
     <link rel="icon" href="">
-    <title>全民直播管理系统-家族列表</title>
+    <title>全民直播管理系统-用户列表</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -22,6 +22,14 @@
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .gimi-table > tbody > tr > td > img {
+            display: inline-block;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+}
+    </style>
 </head>
 
 <body>
@@ -37,24 +45,18 @@
             <div class="main-header"></div>
          
             <div class="main-content main-gray" style="padding-bottom:0;margin-top:44px;">
-                   <h3 class="mb-nav" style=""> <a  href="family_list.html?item=nav-line-3">家族列表</a>   </h3>
+                   <h3 class="mb-nav" style=""> <a  href="music_list.html?item=nav-line-4">音乐列表</a>  </h3>
                 <div class="content">
                      <div class="content-header">
                        
                         <div class="content-search">
                             <form class="" id="">
-                                <!-- <select class="form-control inline-blok">
-                                    <option value="all">全部</option>
-                                    <option value="id">ID</option>
-                                    <option value="name">用户名</option>
-                                    <option value="account">帐号</option>
-                                    <option value="phone">手机号</option>
-                                </select> -->
+                               
                                <div class="form-group has-feedback inline-blok search-box" style="position:relative;">
                                     <label class="sr-only" for="search">搜索</label>
-                                    <input class="form-control search-input" placeholder="ID" type="text" id="header-search" />
-                                    <input class="form-control search-input" placeholder="家族长" type="text" id="header-search" />
-                                      
+                                    <input class="form-control search-input" placeholder="歌曲名" type="text" id="header-search" />
+                                    <input class="form-control search-input" placeholder="归类" type="text" id="header-search" />
+                                    <input class="form-control search-input" placeholder="歌手名" type="text" id="header-search" />
                                    <a href="#">查询</a>
                                   
                                 </div>
@@ -63,9 +65,8 @@
                          <div class="content-search">
                             <form class="search-box" id="">
                               
-                                    <a href="fl_2_add_family.html?item=nav-line-3" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加家族</a>
-                                      <a href="fl_2_family_notice.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">家族公告</a>
-                                      <a href="fl_2_family_contract.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">合同</a>
+                                    <a href="ml_2_add_music.html?item=nav-line-4" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加音乐</a>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -74,15 +75,12 @@
                         <thead>
                             <tr>
                               
-                                <th class="table-sort sort-both sort-down" type="number">ID</th>
-                              
-                                <th>家族名</th>
-                                <th>家族长</th>
-                                <th>主播人数</th>
-                                <th>当日收益（元）</th>
-                                <th>当月收益（元）</th>
-                                <th>累积收益（元）</th>
-                                <th>主播列表</th>
+                               
+                                <th>图片</th>
+                                <th>歌曲名</th>
+                                <th>歌手</th>
+                                <th>归类</th>
+                                <th>文件大小</th>
                                
                                 <th>操作</th>
                             </tr>
@@ -90,21 +88,17 @@
                         <tbody>
                             <tr>
                                
-                                <td>0001</td>
+                                <td><img src="images/img1.png" alt=""></td>
                               
-                                
-                                <td class="color-blue">慌得要死</td>
-                                <td>黄晓明</td>
-                                <td class="text-blue">23</td>
-                                <td class="text-blue">2222</td>
-                                <td class="text-blue"> 4342</td>
-                                <td class="text-green">3424</td>
-                                <td> <a href="fl_2_anchor_list.html?item=nav-line-3" class="text-blue" >【主播列表】</a></td>
+                                <td>耿直BOY</td>
+                                <td>男</td>
+                                <td>1990-02-01</td>
+                                <td class="table-text">曾经获得迪尼斯全球最能吃奖曾经获得迪尼斯全球最能吃奖</td>
+                               
                                 <td class="membership-edit">
                                     <!--<a href="" class="user-edit" style="font-size:14px;">推荐</a>-->
-                                     <a href="fl_2_edit_family.html?item=nav-line-3" class="">【编辑】</a>
-                                     <a href="fl_2_check_family.html?item=nav-line-3" class="">【查看】</a>
-                                      <a href="" data-showmodal="del-people-modal" class="user-edit" style="font-size:14px;">【删除】</a>
+                                     <a href="ml_2_edit_music.html?item=nav-line-4" class="">【修】</a>
+                                      <a href="" data-showmodal="del-people-modal" class="user-edit" style="font-size:14px;">【删】</a>
                                        
                                           
                                 </td>
@@ -179,7 +173,7 @@
     </div>
      <div class="modal-log-box del-people-modal">
         <div class="modal-cont">
-            <p>确定移除该家族吗？</p>
+            <p>确定移除该成员吗？</p>
            
             <div class="modal-btn-box">
                 <a href="#">确定</a>

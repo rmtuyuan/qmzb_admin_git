@@ -22,25 +22,44 @@
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .atte-info-con {
+            width: 50%;
+            float: left;
+        }
+        .atte-info-con>li>input, .atte-info-con>li>select, .atte-info-con>li>textarea {
+            width: 60%;
+        }
+        .atte-info-con>li>p {
+            width: 20%;
+        }
+        .img-file-box>div{
+            width:120px;
+            height: 100px;
+        }
+        .atte-info-con-lf li{
+            margin: 25px 0;
+        }
+    </style>
 </head>
 
 <body>
     <section>
         <!--左侧边栏-->
         <div class="left-side">
-           
+
         </div>
 
         <!--右边主体内容-->
         <div class="main">
             <!--头部-->
             <div class="main-header"></div>
-         
-            <div class="main-content main-gray" style="padding-bottom:0;margin-top:44px;">
-                   <h3 class="mb-nav" style=""> <a  href="family_list.html?item=nav-line-3">家族列表</a>   </h3>
+
+            <div class="main-content main-gray clearfloat" style="padding-bottom:0;margin-top:44px;">
+                <h3 class="mb-nav"> <a href="family_list.html?item=nav-line-3">家族列表</a> > <a href="">家族公告</a> </h3>
                 <div class="content">
-                     <div class="content-header">
-                       
+                    <div class="content-header">
+
                         <div class="content-search">
                             <form class="" id="">
                                 <!-- <select class="form-control inline-blok">
@@ -50,86 +69,81 @@
                                     <option value="account">帐号</option>
                                     <option value="phone">手机号</option>
                                 </select> -->
-                               <div class="form-group has-feedback inline-blok search-box" style="position:relative;">
+                                <div class="form-group has-feedback inline-blok search-box" style="position:relative;">
                                     <label class="sr-only" for="search">搜索</label>
-                                    <input class="form-control search-input" placeholder="ID" type="text" id="header-search" />
-                                    <input class="form-control search-input" placeholder="家族长" type="text" id="header-search" />
-                                      
-                                   <a href="#">查询</a>
                                   
+                                    <input class="form-control search-input" placeholder="关键字" type="text" id="header-search" />
+
+                                    <a href="#">查询</a>
+
                                 </div>
                             </form>
                         </div>
-                         <div class="content-search">
+                        <div class="content-search">
                             <form class="search-box" id="">
-                              
-                                    <a href="fl_2_add_family.html?item=nav-line-3" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加家族</a>
+
+                                 <a href="fl_2_add_family.html?item=nav-line-3" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加家族</a>
                                       <a href="fl_2_family_notice.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">家族公告</a>
                                       <a href="fl_2_family_contract.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">合同</a>
-                                </div>
-                            </form>
                         </div>
+                        </form>
                     </div>
-                     <table class="table gimi-table table-striped" id="tableSort">
-                        <thead>
-                            <tr>
-                              
-                                <th class="table-sort sort-both sort-down" type="number">ID</th>
-                              
-                                <th>家族名</th>
-                                <th>家族长</th>
-                                <th>主播人数</th>
-                                <th>当日收益（元）</th>
-                                <th>当月收益（元）</th>
-                                <th>累积收益（元）</th>
-                                <th>主播列表</th>
-                               
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                               
-                                <td>0001</td>
-                              
-                                
-                                <td class="color-blue">慌得要死</td>
-                                <td>黄晓明</td>
-                                <td class="text-blue">23</td>
-                                <td class="text-blue">2222</td>
-                                <td class="text-blue"> 4342</td>
-                                <td class="text-green">3424</td>
-                                <td> <a href="fl_2_anchor_list.html?item=nav-line-3" class="text-blue" >【主播列表】</a></td>
-                                <td class="membership-edit">
-                                    <!--<a href="" class="user-edit" style="font-size:14px;">推荐</a>-->
-                                     <a href="fl_2_edit_family.html?item=nav-line-3" class="">【编辑】</a>
-                                     <a href="fl_2_check_family.html?item=nav-line-3" class="">【查看】</a>
+                </div>
+                <table class="table gimi-table table-striped" id="tableSort">
+                <thead>
+                    <tr>
+
+                        <th class="table-sort sort-both sort-down" type="number">标题</th>
+                        <th>创建时间</th>
+                      
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>0001</td>
+
+
+
+                        <td class="text-blue">1222</td>
+                     
+                        <td class="membership-edit">
+                            <!--<a href="" class="user-edit" style="font-size:14px;">推荐</a>-->
+                                  <a href="fl_2_fn_3_edit_notice.html?item=nav-line-3" class="">【编辑】</a>
+                                     <a href="fl_2_fn_3_notice_detial.html?item=nav-line-3" class="">【查看】</a>
                                       <a href="" data-showmodal="del-people-modal" class="user-edit" style="font-size:14px;">【删除】</a>
                                        
-                                          
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
 
-                     <div class="content-footer">
-                        <div class="page-text">
-                            当前显示 <span id="page-star">1</span> 到 <span id="page-end">9</span> 条，共 <span id="page-all">12</span> 条记录。
-                        </div>
-                        <div class="page-btn">
-                            <a href="" class="btn btn-yellow">上一页</a>
-                            <a href="" class="btn btn-yellow active">1</a>
-                            <a href="" class="btn btn-yellow">2</a>
-                            <a href="" class="btn btn-yellow">3</a>
-                            <a href="" class="btn btn-yellow">4</a>
-                            <a href="" class="btn btn-yellow">下一页</a>
-                        </div>
-                    </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="content-search" style="margin:20px 10px;">
+                <form class="search-box" id="">
+
+                    <a href="fl_2_fn_3_add_notice.html?item=nav-line-3"  style="margin-right:10px; background:#369;width:100px;">添加公告</a>
 
 
+                </form>
+            </div>
+            <div class="content-footer">
+                <div class="page-text">
+                    当前显示 <span id="page-star">1</span> 到 <span id="page-end">9</span> 条，共 <span id="page-all">12</span> 条记录。
+                </div>
+                <div class="page-btn">
+                    <a href="" class="btn btn-yellow">上一页</a>
+                    <a href="" class="btn btn-yellow active">1</a>
+                    <a href="" class="btn btn-yellow">2</a>
+                    <a href="" class="btn btn-yellow">3</a>
+                    <a href="" class="btn btn-yellow">4</a>
+                    <a href="" class="btn btn-yellow">下一页</a>
                 </div>
             </div>
+              
+            </div>
+        </div>
 
 
         </div>
@@ -140,87 +154,87 @@
     <div class="modal-log-box add-robot-modal">
         <div class="modal-cont">
             <p>确定加入机器人？</p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box del-robot-modal">
+    <div class="modal-log-box del-robot-modal">
         <div class="modal-cont">
             <p>确定撤销机器人？</p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box add-recommend-modal">
+    <div class="modal-log-box add-recommend-modal">
         <div class="modal-cont">
             <p>确定加入推荐？</p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box del-recommend-modal">
+    <div class="modal-log-box del-recommend-modal">
         <div class="modal-cont">
             <p>确定撤销推荐？</p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box del-people-modal">
+    <div class="modal-log-box del-people-modal">
         <div class="modal-cont">
-            <p>确定移除该家族吗？</p>
-           
+            <p>确定移除该公告吗？</p>
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box add-fans-100-modal">
+    <div class="modal-log-box add-fans-100-modal">
         <div class="modal-cont">
             <p>确定移加入100粉丝吗？<span style="font-size:14px;color:#fe426f"> (确定之后不可取消)</span></p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
-     <div class="modal-log-box add-fans-500-modal">
+    <div class="modal-log-box add-fans-500-modal">
         <div class="modal-cont">
             <p>确定移加入500粉丝吗？<span style="font-size:14px;color:#fe426f"> (确定之后不可取消)</span></p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">确定</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
     </div>
     <div class="modal-log-box add-people-modal">
         <div class="modal-cont" style="padding:10px 0;">
             <p style="margin:10px 0;">
-                <input type="text" placeholder="输入经纪人ID" class="add-jjr-input" >
+                <input type="text" placeholder="输入经纪人ID" class="add-jjr-input">
             </p>
-           
+
             <div class="modal-btn-box">
                 <a href="#">添加</a>
-                 <a href="#" class="quit-modal">取消</a>
+                <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
         <div class="modal-close-modal"></div>
     </div>
-     <!--弹窗-->
+    <!--弹窗-->
     <!--JS-->
     <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
     <script>
@@ -231,9 +245,9 @@
     <script src="js/tableSort.js"></script>
     <script src="js/nomoJS.js"></script>
     <script src="js/gimi.js"></script>
-     <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <script src="js/fetch.js"></script>
-      <script src="js/paging.js"></script>
+    <script src="js/paging.js"></script>
     <script src="js/jz_admin.js"></script>
     <script>
         $(function () {
@@ -242,12 +256,12 @@
             });
 
             //点击弹窗
-            $(".user-edit").click(function (e) {  
+            $(".user-edit").click(function (e) {
                 //
                 e.preventDefault();
-               $("."+$(this).data("showmodal")).show();
+                $("." + $(this).data("showmodal")).show();
             });
-             $(".quit-modal").click(function (e) {  
+            $(".quit-modal").click(function (e) {
                 //
                 e.preventDefault();
                 $('.modal-log-box').hide();

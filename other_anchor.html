@@ -534,6 +534,9 @@
     <script src="js/gimi.js"></script>
     <script>
         $(function () {
+            
+             var h =  $(".left-side").height();
+            $(".left-side").scrollTop(h);
             $(".radio-box input").click(function () {
                 $("." + $(this).data("item")).show().siblings(".img-file-box-con").hide();
             });

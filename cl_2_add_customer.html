@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit" />
+    <link rel="icon" href="">
+    <title>全民直播管理系统-添加用户</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/gimi.css">
+    <link rel="stylesheet" href="css/my_style.css">
+    <link rel="stylesheet" href="css/checkbix.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section>
+        <!--左侧边栏-->
+        <div class="left-side">
+         
+        </div>
+
+        <!--右边主体内容-->
+        <div class="main">
+            <!--头部-->
+             <div class="main-header"></div>
+          
+            <div class="main-content main-gray" style="padding-bottom:0;margin-top:44px;">
+              <h3 class="mb-nav" style=""> <a  href="customer_list.html?item=nav-line-2">用户列表</a> > <a  href="">添加用户</a> <span style="font-size:14px;">今日新增：<span>（2546）</span>人</span></h3>
+                <!--<div class="main-nav atte-info-box">
+                    <div>
+                        <span>注意</span>
+                    </div>
+                    <ul>
+                        <li>1、信息认证后方可加入家族，并获得更多推荐机会</li>
+                        <li>2、信息认证后方可加入家族，并获得更多推荐机会</li>
+                        <li>3、信息认证后方可加入家族，并获得更多推荐机会 信息认证后方可加入家族，并获得更多推荐机会
+                        </li>
+                    </ul>
+                </div>-->
+                 <div class="content-search" style="margin-top:20px;">
+                            <form class="search-box" id="">
+                              
+                                    <a href="cl_2_add_customer.html?item=nav-line-2" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加用户</a>
+                                      <a href="cl_2_set_customer_level.html?item=nav-line-2" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">设置用户等级</a>
+                                </div>
+                            </form>
+                        </div>
+                <ul class="atte-info-con">
+                    <li style="align-items: center;">
+                        <p>昵称:</p>
+                       <input class="fs-text-input  fs-input erroed" type="text"  placeholder="输入昵称">
+                    </li>
+                    <li>
+                        <p>邮箱:</p>
+                         <input class="fs-text-input  fs-input erroed" type="mail"  placeholder="输入邮箱">
+                    </li>
+                    <li>
+                        <p>手机:</p>
+                         <input class="fs-text-input  fs-input erroed" type="number"  placeholder="输入手机号">
+                    </li>
+                     <li>
+                        <p>密码:</p>
+                         <input class="fs-text-input  fs-input erroed" type="text"  placeholder="不填写为默认密码:666666">
+                    </li>
+                      <li>
+                        <p>账号钻石:</p>
+                         <input class="fs-text-input  fs-input erroed" type="number"  placeholder="输入账号钻石">
+                    </li>
+                      <li>
+                        <p>经验值:</p>
+                         <input class="fs-text-input  fs-input erroed" type="number"  placeholder="输入经验值">
+                    </li>
+                     <li>
+                        <p>邮箱验证:</p>
+                          <div style="">
+
+                                                        <label class="demo--label">
+                            <input class="demo--radio erroed af-input" type="radio" value="男" name="mail_check">
+                            <span class="demo--radioInput" ></span>已验证
+                        </label>
+                                                        <label class="demo--label">
+                            <input class="demo--radio erroed" type="radio" value="女" name="mail_check">
+                            <span class="demo--radioInput"></span>未验证
+                        </label>
+                                </div>
+                    </li>
+                     <li>
+                        <p>手机验证:</p>
+                          <div style="">
+
+                                                        <label class="demo--label">
+                            <input class="demo--radio erroed af-input" type="radio" value="男" name="phone_check">
+                            <span class="demo--radioInput" ></span>已验证
+                        </label>
+                                                        <label class="demo--label">
+                            <input class="demo--radio erroed" type="radio" value="女" name="phone_check">
+                            <span class="demo--radioInput"></span>未验证
+                        </label>
+                                                    </div>
+                    </li>
+                   
+                      <li style="align-items: flex-start;display:flex; margin:20px 0;">
+                        <p>头像:</p>
+                        <div class="img-logo-box">
+                            <img src="img/h5share_img_banner_list.jpg" alt="">
+                        </div>
+                        <div class="fam-set-img-box" >
+                            <input type="file"  class="fs-img-file fs-input erroed">
+                            <span> 上传图片</span>
+                        </div>
+                    </li>
+                   <li>
+                        <p>签名:</p>
+                        <textarea class="fs-text-input fs-input erroed" style="width:500px;padding:5px; border:1px solid #ccc;"></textarea>
+                    </li>
+                  
+                     <li>
+                        <p></p>
+                        <a href="#" class="atte-submit fs-atte-submit">提交申请</a>
+                    </li>
+                  
+                </ul> 
+            </div>
+
+
+        </div>
+        </div>
+    </section>
+
+
+
+     <div class="modal-info">
+         <div class="modal-content">
+            <div  class="other-modal-info">
+                <p class="info-text">
+                   
+                </p>
+                 <p>
+                    <a href="#" class="info-sure info-sure-2">确定</a>
+                  
+                </p>
+            </div>
+            
+         </div>
+        <div class="close-modal">
+
+        </div>
+</div>
+    <!--JS-->
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery-1.12.4.min.js"><\/script>')
+    </script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/checkbix.min.js"></script>
+    <script src="js/tableSort.js"></script>
+    <script src="js/nomoJS.js"></script>
+    <script src="js/gimi.js"></script>
+    <script>
+           $(function () { 
+               $(".radio-box input").click(function () {  
+                    $("."+$(this).data("item")).show().siblings(".img-file-box-con").hide();
+               });
+            });
+    </script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/jz_admin.js"></script>
+    <script>
+       $(function () {  
+           //家族设置  调用 init()
+            Family_setting.init();
+       })
+    </script>
+</body>
+
+</html>

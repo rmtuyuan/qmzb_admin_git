@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit" />
+    <link rel="icon" href="">
+    <title>全民直播管理系统-家族列表</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/gimi.css">
+    <link rel="stylesheet" href="css/my_style.css">
+    <link rel="stylesheet" href="css/checkbix.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .atte-info-con {
+            width: 50%;
+            float: left;
+        }
+        .atte-info-con>li>input, .atte-info-con>li>select, .atte-info-con>li>textarea {
+            width: 60%;
+        }
+        .atte-info-con>li>p {
+            width: 20%;
+        }
+        .img-file-box>div{
+            width:120px;
+            height: 100px;
+        }
+        .atte-info-con-lf li{
+            margin: 25px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!--左侧边栏-->
+        <div class="left-side">
+
+        </div>
+
+        <!--右边主体内容-->
+        <div class="main">
+            <!--头部-->
+            <div class="main-header"></div>
+
+            <div class="main-content main-gray clearfloat" style="padding-bottom:0;margin-top:44px;">
+                <h3 class="mb-nav"> <a href="family_list.html?item=nav-line-3">家族列表</a> > <a href="">查看家族</a> </h3>
+                <div class="content">
+                    <div class="content-header">
+
+                        <div class="content-search">
+                           
+                        </div>
+                        <div class="content-search">
+                            <form class="search-box" id="">
+
+                               <a href="fl_2_add_family.html?item=nav-line-3" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加家族</a>
+                                      <a href="fl_2_family_notice.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">家族公告</a>
+                                      <a href="fl_2_family_contract.html?item=nav-line-3" data-showmodal="add-people-modal"  style="margin-right:10px; background:#369;width:100px;">合同</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <ul class="atte-info-con atte-info-con-lf" >
+                    <li style="align-items: flex-start;display:flex; margin:20px 0;">
+                        <p>头像:</p>
+                        <div class="img-logo-box">
+                            <img src="img/h5share_img_banner_list.jpg" alt="">
+                        </div>
+                        <div class="fam-set-img-box">
+                            <input type="file" class="fs-img-file fs-input erroed">
+                            <span> 上传图片</span>
+                        </div>
+                    </li>
+                    <li style="align-items: center;">
+                        <p>家族ID:</p>
+                        <input class="fs-text-input  fs-input erroed" type="number" placeholder="输入家族ID">
+                    </li>
+                    <li>
+                        <p>家族名:</p>
+                        <input class="fs-text-input  fs-input erroed" type="text" placeholder="输入家族名">
+                    </li>
+                    <li>
+                        <p>家族长:</p>
+                        <input class="fs-text-input  fs-input erroed" type="text" placeholder="输入家族长">
+                    </li>
+
+
+                    <li style="margin-top:10px;">
+                        <p>家族宣言:</p>
+                        <textarea class="fs-text-input fs-input erroed" style="height:125px; width:60%;padding:5px; border:1px solid #ccc;"></textarea>
+                    </li>
+                    <li style="margin:20px 0;">
+                        <p>家族公告:</p>
+                        <textarea  class="fs-text-input fs-input erroed" style="height:120px;width:60%;padding:5px; border:1px solid #ccc;"></textarea>
+                    </li>
+                    <li style="align-items: center;">
+                        <p>经纪人上限:</p>
+                        <input class="fs-text-input  fs-input erroed" type="number" placeholder="输入经纪人上限">
+                    </li>
+                   
+
+                </ul>
+                <ul class="atte-info-con" style="margin-top:20px;">
+                    
+                  
+            
+                    <li>
+                        <p>法人姓名:</p>
+                        <input type="text" name="" value="" placeholder="请输入法人姓名"  >
+                    </li>
+                      <li>
+                        <p>证件号码:</p>
+                        <input type="text" name="" placeholder="请输入证件号码">
+                    </li>
+                   <li>
+                        <p>公司全称:</p>
+                        <input type="text" name=""  placeholder="请输入公司全称" >
+                    </li>
+                      <li style="align-items: flex-start;display:flex; margin:20px 0;">
+                        <p>头像:</p>
+                        <div class="img-logo-box">
+                            <img src="img/h5share_img_banner_list.jpg" alt="">
+                        </div>
+                        <div class="fam-set-img-box">
+                            <input type="file" class="fs-img-file fs-input erroed">
+                            <span> 上传营业执照</span>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <p>证件类型:</p>
+                        <div class="radio-box">
+
+                            <input type="radio" data-item='id_card'  checked id="id_card" name="id_style">
+                            <label for="id_card">身份证</label>
+
+                            <!--<input type="radio" data-item='hz_card' id="hz_card" name="id_style">
+                            <label for="hz_card">护照</label>
+
+                            <input type="radio" data-item='tw_card' id="tw_card" name="id_style">
+                            <label for="tw_card">台湾身份证</label>-->
+                        </div>
+                    </li>
+                   
+                    <li>
+                        <p></p>
+                        <div class="img-file-box-con id_card">
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>身份证正面</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>身份证反面</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>手持身份证</p>
+                            </div>
+                        </div>
+                         <div class="img-file-box-con hz_card" style="display:none">
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>护照第一页</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>护照第二页</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>手持护照第一页</p>
+                            </div>
+                        </div>
+                         <div class="img-file-box-con tw_card" style="display:none">
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>证件正面</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>证件反面</p>
+                            </div>
+                            <div class="img-file-box">
+                                <div>
+                                    <input type="file">
+                                </div>
+                                <p>手持证件</p>
+                            </div>
+                        </div>
+                    </li>
+                      <li style="margin-top:20px;">
+                        <p>手持证件照示例:</p>
+                        <div class="img-logo-box">
+                            <img src="img/h5share_img_banner_list.jpg" alt="">
+                        </div>
+                    </li>
+                      <li>
+                        <p>抽成比例:</p>
+                        <input type="text" name="" value="" placeholder="15%"  >
+                    </li>
+                      <li>
+                        <p>密码:</p>
+                        <input type="text" name="" placeholder="2345678">
+                    </li>
+                    <!--<li>
+                        <p></p>
+                        <a href="#" class="atte-submit">提交申请</a>
+                    </li>-->
+                </ul> 
+              
+            </div>
+        </div>
+
+
+        </div>
+        </div>
+    </section>
+
+    <!--弹窗-->
+    <div class="modal-log-box add-robot-modal">
+        <div class="modal-cont">
+            <p>确定加入机器人？</p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box del-robot-modal">
+        <div class="modal-cont">
+            <p>确定撤销机器人？</p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box add-recommend-modal">
+        <div class="modal-cont">
+            <p>确定加入推荐？</p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box del-recommend-modal">
+        <div class="modal-cont">
+            <p>确定撤销推荐？</p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box del-people-modal">
+        <div class="modal-cont">
+            <p>确定移除该成员吗？</p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box add-fans-100-modal">
+        <div class="modal-cont">
+            <p>确定移加入100粉丝吗？<span style="font-size:14px;color:#fe426f"> (确定之后不可取消)</span></p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box add-fans-500-modal">
+        <div class="modal-cont">
+            <p>确定移加入500粉丝吗？<span style="font-size:14px;color:#fe426f"> (确定之后不可取消)</span></p>
+
+            <div class="modal-btn-box">
+                <a href="#">确定</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-log-box add-people-modal">
+        <div class="modal-cont" style="padding:10px 0;">
+            <p style="margin:10px 0;">
+                <input type="text" placeholder="输入经纪人ID" class="add-jjr-input">
+            </p>
+
+            <div class="modal-btn-box">
+                <a href="#">添加</a>
+                <a href="#" class="quit-modal">取消</a>
+            </div>
+        </div>
+        <div class="modal-close-modal"></div>
+    </div>
+    <!--弹窗-->
+    <!--JS-->
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery-1.12.4.min.js"><\/script>')
+    </script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/checkbix.min.js"></script>
+    <script src="js/tableSort.js"></script>
+    <script src="js/nomoJS.js"></script>
+    <script src="js/gimi.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/paging.js"></script>
+    <script src="js/jz_admin.js"></script>
+    <script>
+        $(function () {
+            $(".radio-box input").click(function () {
+                $("." + $(this).data("item")).show().siblings(".img-file-box-con").hide();
+            });
+
+            //点击弹窗
+            $(".user-edit").click(function (e) {
+                //
+                e.preventDefault();
+                $("." + $(this).data("showmodal")).show();
+            });
+            $(".quit-modal").click(function (e) {
+                //
+                e.preventDefault();
+                $('.modal-log-box').hide();
+            });
+
+
+            // Membership.DataLoad();
+        });
+    </script>
+
+</body>
+
+</html>

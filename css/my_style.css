@@ -136,7 +136,7 @@
     font-size: 16px;
     border-radius: 5px;
     outline: 0;
-    border: 1px solid #ccc;
+    border: 1px solid #666;
     padding-left: 8px;
 }
 
@@ -211,7 +211,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
-    background: #fe426f;
+    background: #369;
     border-radius: 5px;
     font-size: 18px;
 }
@@ -357,7 +357,7 @@ th {
     align-items: center;
     z-index: 1;
     color: #fff;
-    background: #fe426f;
+    background: #369;
     border-radius: 5px;
 }
 
@@ -579,4 +579,45 @@ input[type=checkbox].checkbix+label>span {
     width: 200px;
     padding-left: 4px;
     border-radius: 5px;
+}
+
+
+
+/*单选按钮*/
+
+.demo--label {
+    margin: 0px 20px 0 0;
+    display: inline-block
+}
+
+.demo--radio {
+    display: none
+}
+
+.demo--radioInput {
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 100%;
+    display: inline-block;
+    height: 16px;
+    margin-right: 10px;
+    margin-top: -1px;
+    vertical-align: middle;
+    width: 16px;
+    line-height: 1
+}
+
+.demo--radio:checked+.demo--radioInput:after {
+    background-color: #369;
+    border-radius: 100%;
+    content: "";
+    display: inline-block;
+    height: 12px;
+    margin: 1px;
+    width: 12px
+}
+
+.demo--checkbox.demo--radioInput,
+.demo--radio:checked+.demo--checkbox.demo--radioInput:after {
+    border-radius: 0
 }

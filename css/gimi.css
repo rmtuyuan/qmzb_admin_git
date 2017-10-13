@@ -974,3 +974,92 @@ p{
 @media screen and (max-width: 767px){
     
 }
+
+
+
+
+
+.fl {
+  float: left;
+}
+.box {
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-top: 30px;
+}
+.box button {
+  padding: 0 10px;
+  margin: 0 10px;
+  height: 40px;
+  float: left;
+  cursor: pointer;
+  border: 1px solid #f0ad4e;
+  background-color: #ffffff;
+    border-radius: 5px;
+}
+.box .first-page,
+.box .last-page {
+  margin: 0;
+}
+.box .pageWrap {
+  height: 40px;
+  float: left;
+  overflow: hidden;
+}
+.box .pageWrap ul {
+  width: 100000px;
+  height: 40px;
+  float: left;
+}
+.box .pageWrap ul li {
+  width: 50px;
+  height: 40px;
+  border: 1px solid #f0ad4e;
+  line-height: 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: left;
+  margin: 0 5px;
+  border-radius: 5px;
+ 
+}
+.box .pageWrap ul .sel-page {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+.box .jump-text {
+  width: 60px;
+  height: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 5px;
+  float: left;
+}
+.box .jump-button {
+  margin: 0;
+  float: left;
+}
+.box .total-pages,
+.box .total-count {
+  margin-left: 10px;
+  float: left;
+  font-size: 14px;
+}
+
+.mb-nav{
+    color:#fff;background:#369;padding:15px;
+}
+.mb-nav>a{
+     color:#fff
+}
+.mb-nav>a:nth-child(2){
+   font-size: 18px;
+}
+.mb-nav>a:hover{
+     color:#fff
+}
