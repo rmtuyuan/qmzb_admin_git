@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit" />
     <link rel="icon" href="">
-    <title>全民直播管理系统-用户列表</title>
+    <title>全民直播管理系统-小视频白名单</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -37,7 +37,7 @@
             <div class="main-header"></div>
          
             <div class="main-content main-gray" style="padding-bottom:0;margin-top:44px;">
-                   <h3 class="mb-nav" style=""> <a  href="video_list.html?item=nav-line-16">小视频列表</a>   </h3>
+                   <h3 class="mb-nav" style=""> <a  href="video_list.html?item=nav-line-16">小视频列表</a> > <a href="">白名单</a>   </h3>
                 <div class="content">
                      <div class="content-header">
                        
@@ -52,11 +52,16 @@
                                 </select> -->
                                <div class="form-group has-feedback inline-blok search-box" style="position:relative;">
                                     <label class="sr-only" for="search">搜索</label>
-                                    <input class="form-control search-input" placeholder="视频名" type="text" id="header-search" />
-                                    <input class="form-control search-input" placeholder="昵称" type="text"  />
                                     
                              
-                                  
+                                    <select name="" id="" class="select-search">
+                                        <option value="">频道</option>
+                                        <option value="">首页</option>
+                                    </select>
+                                       <select name="" id="" class="select-search">
+                                        <option value="">状态</option>
+                                        <option value="">全部</option>
+                                    </select>
                                    <a href="#">查询</a>
                                   
                                 </div>
@@ -65,8 +70,8 @@
                          <div class="content-search">
                             <form class="search-box" id="">
                               
-                                    <a href="vl_2_add_video.html?item=nav-line-16" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加小视频</a>
-                                      <a href="vl_2_white_list.html?item=nav-line-16" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">白名单</a>
+                                    <a href="vl_2_wl_3_add_whitelist.html?item=nav-line-16" data-showmodal="add-people-modal" style="margin-right:10px; background:#369;width:100px;">添加白名单</a>
+                                  
                                     
                                 </div>
                             </form>
@@ -76,14 +81,14 @@
                         <thead>
                             <tr>
                               
-                                <th class="table-sort sort-both sort-down" type="number">序号</th>
+                                <th class="table-sort sort-both sort-down" type="number">频道内位置</th>
                               
-                                <th>视频名称</th>
-                                <th>上传ID</th>
-                                <th>审核状态</th>
-                                <th>上传日期</th>
-                                  <th>备注</th>
+                                <th>频道</th>
+                                <th>预告图片</th>
                                 
+                                <th>上传日期</th>
+                                <th>状态</th>
+                                <th>详情</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -95,16 +100,15 @@
                                
                                 <td>北京</td>
                              
-                                <td class="color-blue">23</td>
+                                <td class="color-blue"><img src="images/img1.png" alt="" style="border-radius:0;"></td>
                                
                                 <td class="text-blue">23</td>
-                               <td class="text-blue">23</td>
-                                <td class="text-green">啊实打实大阿斯顿阿斯顿</td>
+                              <td class="text-blue">23</td>
+                                <td class="membership-edit">   <a href="vl_2_wl_3_check_whitelist.html?item=nav-line-16" class="">【查看】</a></td>
                                 <td class="membership-edit">
                                     <!--<a href="" class="user-edit" style="font-size:14px;">推荐</a>-->
-                                      <a href="" data-showmodal="hide-people-modal" class="user-edit" style="font-size:14px;">【隐藏】</a>
-                                       <a href="vl_2_check_video.html?item=nav-line-16" class="">【查看】</a>
-                                     <a href="vl_2_edit_video.html?item=nav-line-16" class="">【修该】</a>
+                                         <a href="" data-showmodal="hide-people-modal" class="user-edit" style="font-size:14px;">【隐藏】</a>
+                                     <a href="vl_2_wl_3_edit_whitelist.html?item=nav-line-30" class="">【修该】</a>
                                       <a href="" data-showmodal="del-people-modal" class="user-edit" style="font-size:14px;">【删除】</a>
                                        
                                           
@@ -141,7 +145,7 @@
     
      <div class="modal-log-box del-people-modal">
         <div class="modal-cont">
-            <p>确定移除该小视频吗？</p>
+            <p>确定移除该条数据吗？</p>
            
             <div class="modal-btn-box">
                 <a href="#">确定</a>
@@ -149,9 +153,9 @@
             </div>
         </div>
     </div>
-      <div class="modal-log-box hide-people-modal">
+     <div class="modal-log-box hide-people-modal">
         <div class="modal-cont">
-            <p>确定隐藏该小视频吗？</p>
+            <p>确定隐藏该条数据吗？</p>
            
             <div class="modal-btn-box">
                 <a href="#">确定</a>
@@ -159,9 +163,9 @@
             </div>
         </div>
     </div>
-      <div class="modal-log-box show-people-modal">
+    <div class="modal-log-box show-people-modal">
         <div class="modal-cont">
-            <p>确定显示该小视频吗？</p>
+            <p>确定显示该条数据吗？</p>
            
             <div class="modal-btn-box">
                 <a href="#">确定</a>
