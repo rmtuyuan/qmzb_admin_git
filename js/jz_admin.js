@@ -1434,13 +1434,429 @@ var People_add = {
 
 }
 
+server = "http://192.168.1.37:8081/";
+
+function getTime() {
+    setTimeout(function () {
+        var duration = $("#audio")[0].duration;
+        if (isNaN(duration)) {
+            getTime();
+        } else {
+            duration=(duration/60).toFixed(2).replace(".",":");
+               $(".js_during").val(duration).addClass("actived").removeClass("errod");
+            
+        }
+    }, 10);
+}
+
+function getObjectURL(file) {
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic  
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)  
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome  
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
+
+ var id = null;
+var Music_list = {
+    li_length: null,
+    SongTypeList: function () {
+        fetch(server + "song/getSongTypeList", {
+            method: 'POST',
+            //      headers: { 'Accept': 'application/json',
+            //      'Content-Type': 'application/json'},
+            mode: 'cors',
+            cache: 'default'
+
+        }).then((response) => response.json()).then(function (data) {
+            //console.log(data);
+            if (data.code == 200) {
+                var a_fram = document.createDocumentFragment();
+                for (var i = 0; i < data.data.length; i++) {
+                    var element = data.data[i];
+                    var opt = document.createElement("option");
+                    $(opt).val(element.classifyId);
+                    $(opt).html(element.name);
+                    a_fram.appendChild(opt);
+                }
+                $("#js_song_type").append(a_fram);
+            }
+        })
+
+
+    },
+    pagesFuc: function (page_number, form) {
+
+        fetch(server + "song/getSongList", {
+            method: 'POST',
+            //      headers: { 'Accept': 'application/json',
+            //      'Content-Type': 'application/json'},
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        }).then((response) => response.json()).then(function (data) {
+            //console.log(data);
+            if (data.code == 200) {
+
+                var li_leng = data.data.totalCount;
+
+                //分页
+                var setTotalCount = li_leng;
+                var all_pages = parseInt(li_leng % 20 == 0 ? li_leng / 20 : li_leng / 20 + 1);
+                $('.content-footer').paging({
+                    initPageNo: 1, // 初始页码
+                    totalPages: all_pages, //总页数
+                    totalCount: '合计' + setTotalCount + '条数据', // 条目总数
+                    slideSpeed: 600, // 缓动速度。单位毫秒
+                    jump: false, //是否支持跳转
+                    callback: function (page) { // 回调函数
+                        //刷新页面
+                        //console.log(page)
+                        Music_list.DataLoad(page_number, form);
+                    }
+                });
+
+
+            }
+        });
+
+    },
+    DataInit: function (page_number) {
+        var form = new FormData();
+        //  page=1     familyid=1
+
+
+        form.append("page", page_number); // 
+        this.pagesFuc(page_number, form);
+    },
+
+    DataLoad: function (page_number, form) {
+
+        fetch(server + "song/getSongList", {
+            method: 'POST',
+            //      headers: { 'Accept': 'application/json',
+            //      'Content-Type': 'application/json'},
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        }).then((response) => response.json()).then(function (data) {
+            //console.log(data);
+            if (data.code == 200) {
+                var tr_fram = document.createDocumentFragment();
+                var li_leng = data.data.list.length;
+
+
+                for (var i = 0; i < li_leng; i++) {
+                    var element = data.data.list[i];
+                    var tr = document.createElement("tr");
+
+                    var dateParms = element.createTime + "";
+
+                    if (dateParms instanceof Date) {
+                        var datatime = dateParms;
+                    }
+
+                    //判断是否为字符串
+
+                    if ((typeof dateParms == "string") && dateParms.constructor == String) {
+
+                        //将字符串日期转换为日期格式
+
+                        var datatime = new Date(parseInt(dateParms));
+
+                    }
+
+                    $(tr).html(
+                        `         <td><img src="${element.picUrl}"></td>
+                                <td>${element.songName}</td>
+                              
+                                <td>${element.singer}</td>
+                                <td>${element.classifyName}</td>
+                                <td>${element.fileSize}</td>
+                                 <td>${element.during}</td>
+                                 <td>${element.hot}</td>
+                                    <td><a href="${element.downUrl}" target="_blank" style="color:#369">点击播放</a></td>
+                                <td>
+                                   
+                                   
+                                       <a href="ml_2_add_music.html?item=nav-line-4&id=${element.id}" style="color:#369" class="">【修】</a>
+                                      <a href="" data-showmodal="del-people-modal"  data-id=${element.id} class="user-edit padd-agree-yes-not" style="font-size:14px;">【删】</a>
+                                   
+                                      
+                                </td>`
+                    );
+                    tr_fram.appendChild(tr);
+                }
+
+                $("#tbody").html(tr_fram);
+
+            }
+        });
+
+
+    },
+    searchSome: function () {
+        //上面搜索框
+        $("#padd_search_btn").click(function (e) {
+            e.preventDefault();
+
+            var singer = $(".singer").val();
+            var classifyId = $(".classifyId").val();
+            var songName = $(".songName").val();
+            var form = new FormData();
+
+            form.append("singer", singer); // 
+            form.append("classifyId", classifyId); // 
+            form.append("songName", songName); // 
+            form.append("page", 1); // 
+            Music_list.pagesFuc(1, form);
+        });
+
+    },
+    AddMusicLoad: function () {
+         id = $.getUrlParam("id");
+        if (id) {
+            //修改
+
+            var songName = $(".songName").val();
+            var form = new FormData();
+
+
+            form.append("id", id); // 
+            form.append("page", 1); // 
+            fetch(server + "song/getSongList", {
+                method: 'POST',
+                //      headers: { 'Accept': 'application/json',
+                //      'Content-Type': 'application/json'},
+                mode: 'cors',
+                cache: 'default',
+                body: form
+            }).then((response) => response.json()).then(function (data) {
+                //console.log(data);
+                if (data.code == 200) {
+                    //   js_img_box    js_img_file  js_hot js_music_size js_music_file js_music_name js_classifyId js_singer js_singName
+                    var ele = data.data.list[0]
+                    $(".js_img_box").attr("src", ele.picUrl).attr("value", ele.picUrl).addClass("actived").removeClass("errod");
+                       $(".js_img_box_ipt").val(ele.picUrl).addClass("actived").removeClass("errod");
+                  
+                    $(".js_songName").val(ele.songName).addClass("actived").removeClass("errod");
+                    $(".js_singer").val(ele.singer).addClass("actived").removeClass("errod");
+                    $(".classifyId").val(ele.classifyName).addClass("actived").removeClass("errod");
+                    $(".js_hot").val(ele.hot).addClass("actived").removeClass("errod");
+                    $(".js_during").val(ele.during).addClass("actived").removeClass("errod");
+                    $(".js_music_size").html(ele.fileSize).val(ele.fileSize).addClass("actived").removeClass("errod");
+                    $(".js_music_name").html(ele.songName).val(ele.downUrl).addClass("actived").removeClass("errod");
+
+
+                }
+            });
+        }else{
+            id="";
+        }
+    },
+    MusicSubmit: function () {
+         $(" .fs-input").keyup(function () {
+
+            if ($(this).val().length > 0) {
+                $(this).addClass("actived");
+                $(this).removeClass("erroed");
+                $(this).css("color", "#333");
+            } else {
+                $(this).removeClass("actived");
+                $(this).addClass("erroed");
+                $(this).css("color", "#fe426f");
+            }
+        });
+
+        $(" .fs-input").blur(function () {
+
+            if ($(this).val().length > 0) {
+                $(this).addClass("actived");
+                $(this).removeClass("erroed");
+                $(this).css("color", "#333");
+            } else {
+                $(this).removeClass("actived");
+                $(this).addClass("erroed");
+                $(this).css("color", "#fe426f");
+            }
+        });
+
+
+        //提交
+         $("#all_submit_btn").click(function (e) {
+            e.preventDefault();
+            // 判断是否都填写完成 
+
+            if ($(".fs-input").length == $(".fs-input.actived").length) {
+                //都填了 fetch   跳转
+                var form_2 = new FormData();
+                for (var j = 0; j < $(" .fs-input.actived").length; j++) {
+                    var element = $($(" .fs-input.actived")[j]);
+                    form_2.append(element.attr("name"), element.val()); // 
+                }
+                    form_2.append("id", id);
+                fetch(server + "/song/createSong", {
+                    method: 'POST',
+                    //headers: myHeaders,
+                    mode: 'cors',
+                    cache: 'default',
+                    body: form_2
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    if (data.code == 200) {
+                        // 成功  ?
+                         showInfo('提交成功');
+                         setTimeout(function () {  
+
+                             window.location.href="music_list.html?item=nav-line-4";
+                         },2000);
+                        // 已绑定银行卡 跳转到money.html
+
+                      
+
+                    } else if (data.code == 400) {
+
+                        showInfo(data.message);
+                    } else {
+                        showInfo('当前网络不稳定,提交失败,请重新登录');
+                    }
+                });
+            } else {
+                //有没填 的 
+
+                //其他没填写
+                showInfo("没有填完");
+
+            }
+        });
+
+
+
+    },
+    uploadImg: function () {
+
+        //图片上传
+        var filechooser = $(".js_file_upload");
+
+        var ipt = null;
+        var file1 = null;
+        filechooser.change(function () {
+            ipt = $(this);
+            file1 = this.files[0];
+              if ($(ipt).hasClass("js_music_file")) {
+                 $(".js_music_name").html(file1.name);
+               
+                 var size=(file1.size/1024/1024).toFixed(2)+"M"
+                   $(".js_music_size").html(size).val(size).addClass("actived").removeClass("errod");
+                  var objUrl = getObjectURL(this.files[0]);  
+                $("#audio").attr("src", objUrl);  
+                $("#audio")[0].play();  
+                   getTime();
+              }
+             
+           
+                   
+            var form_2 = new FormData();
+
+
+            form_2.append("file", file1);
+            fetch(server + "/file/upload", {
+                method: 'POST',
+                //headers: myHeaders,
+                mode: 'cors',
+                cache: 'default',
+                body: form_2
+            }).then((response) => response.json()).then(function (data) {
+                //console.log(data);
+                // atteRolu[ipt.attr("name")]=222;
+                //  console.log(atteRolu.pic_id_front);
+                if (data.code == 200) {
+                    //添加图片 
+                    if ($(ipt).hasClass("js_music_file")) {
+                        //上传的音乐文件  getTime(); 
+                     
+                        //$(".js_music_name").html(ele.downUrl).val(ele.downUrl).addClass("actived").removeClass("errod");
+                        
+                        
+                           $(".js_music_name").val(data.data.url).addClass("actived").removeClass("errod");
+                    } else {
+                        //上传的图片文件
+                        $(".js_img_box").attr("src", data.data.url);
+                        $(".js_img_box_ipt").val(data.data.url).addClass("actived").removeClass("errod");
+                 }
+
+
+                } else {
+                    ipt.addClass("erroed").removeClass("actived");
+                      $(".js_img_box").attr("src", "").attr("value", "").removeClass("actived").addClass("errod");
+                        $(".js_img_box").attr("src", "").attr("value","").removeClass("actived").addClass("errod");
+                    showInfo('当前网络不稳定,上传失败,请重新上传');
+                }
+
+            });
+        });
+
+        //图片上传结束
+
+
+    },
+ Edit_agree: function () {
+        // 同意或者驳回
+        $("#tableSort").on("click", ".padd-agree-yes-not", function (e) {
+            e.preventDefault();
+
+            $("." + $(this).data("showmodal")).find(".padd-agree-btn").attr("data-id", $(this).data("id"));
+
+
+        })
+        $(".padd-agree-btn").click(function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+          
+            var form = new FormData();
+            form.append("id", id); // 
+           
+            fetch(server + "song/deleteSong", {
+                method: 'POST',
+
+                mode: 'cors',
+                cache: 'default',
+                body: form
+            }).then((response) => response.json()).then(function (data) {
+                //console.log(data);
+                if (data.code == 200) {
+                    $('.modal-log-box').hide();
+                    showInfo("操作成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 300);
+
+
+                } else {
+                    showInfo(data.message)
+                }
+            });
+        });
+
+    }
+
+}
+
+
+
+
 //成员月数据
 var People_month_data = {
     init: function () {
 
     },
     li_length: null,
-    n:0,
+    n: 0,
     pagesFuc: function (page_number, form) {
 
         fetch(server + "check/getStatisticMonthList", {
@@ -1460,10 +1876,10 @@ var People_month_data = {
                 var setTotalCount = li_leng;
                 var all_pages = parseInt(li_leng % 20 == 0 ? li_leng / 20 : li_leng / 20 + 1);
                 People_month_data.n++;
-                if(  People_month_data.n==1){
-                        $(".monthtime").val(data.data.currentTime);
+                if (People_month_data.n == 1) {
+                    $(".monthtime").val(data.data.currentTime);
                 }
-             
+
                 $('.content-footer').paging({
                     initPageNo: 1, // 初始页码
                     totalPages: all_pages, //总页数
@@ -1507,7 +1923,7 @@ var People_month_data = {
             if (data.code == 200) {
                 var tr_fram = document.createDocumentFragment();
                 var li_leng = data.data.list.length;
-               
+
 
                 for (var i = 0; i < li_leng; i++) {
                     var element = data.data.list[i];
@@ -1528,7 +1944,7 @@ var People_month_data = {
                         var datatime = new Date(parseInt(dateParms));
 
                     }
-                   
+
                     $(tr).html(
                         `
                     
@@ -1580,8 +1996,8 @@ var People_day_data = {
     init: function () {
 
     },
-     li_length: null,
-     n:0,
+    li_length: null,
+    n: 0,
     pagesFuc: function (page_number, form) {
 
         fetch(server + "check/getStatisticDayList", {
@@ -1600,10 +2016,10 @@ var People_day_data = {
                 //分页
                 var setTotalCount = li_leng;
                 People_day_data.n++;
-                if(People_day_data.n==1){
-                     $(".daytime").val(data.data.currentTime);
+                if (People_day_data.n == 1) {
+                    $(".daytime").val(data.data.currentTime);
                 }
-                 
+
                 var all_pages = parseInt(li_leng % 20 == 0 ? li_leng / 20 : li_leng / 20 + 1);
                 $('.content-footer').paging({
                     initPageNo: 1, // 初始页码
@@ -1648,7 +2064,7 @@ var People_day_data = {
             if (data.code == 200) {
                 var tr_fram = document.createDocumentFragment();
                 var li_leng = data.data.list.length;
-            
+
 
                 for (var i = 0; i < li_leng; i++) {
                     var element = data.data.list[i];
@@ -1669,7 +2085,7 @@ var People_day_data = {
                         var datatime = new Date(parseInt(dateParms));
 
                     }
-                   
+
                     $(tr).html(
                         `
                     

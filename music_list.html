@@ -54,11 +54,13 @@
                                
                                <div class="form-group has-feedback inline-blok search-box" style="position:relative;">
                                     <label class="sr-only" for="search">搜索</label>
-                                    <input class="form-control search-input" placeholder="歌曲名" type="text" id="header-search" />
-                                    <input class="form-control search-input" placeholder="归类" type="text" id="header-search" />
-                                    <input class="form-control search-input" placeholder="歌手名" type="text" id="header-search" />
-                                   <a href="#">查询</a>
-                                  
+                                    <input class="form-control search-input songName" name="songName" placeholder="歌曲名" type="text" id="search" />
+                                    <select name="classifyId"  class="classifyId" id="js_song_type" class="select-search">
+                                        <option value="">所有</option>
+                                    </select>
+                                    <input class="form-control search-input singer" name="singer" placeholder="歌手名" type="text" id="header-search" />
+                                   <a href="#" id="padd_search_btn">查询</a> 
+                                
                                 </div>
                             </form>
                         </div>
@@ -81,12 +83,14 @@
                                 <th>歌手</th>
                                 <th>归类</th>
                                 <th>文件大小</th>
-                               
+                                <th>音乐长度</th>
+                                 <th>热度</th>
+                                  <th>播放地址</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="tbody">
+                            <!--<tr>
                                
                                 <td><img src="images/img1.png" alt=""></td>
                               
@@ -96,29 +100,19 @@
                                 <td class="table-text">曾经获得迪尼斯全球最能吃奖曾经获得迪尼斯全球最能吃奖</td>
                                
                                 <td class="membership-edit">
-                                    <!--<a href="" class="user-edit" style="font-size:14px;">推荐</a>-->
+                                   
                                      <a href="ml_2_edit_music.html?item=nav-line-4" class="">【修】</a>
                                       <a href="" data-showmodal="del-people-modal" class="user-edit" style="font-size:14px;">【删】</a>
                                        
                                           
                                 </td>
-                            </tr>
+                            </tr>-->
                             
                         </tbody>
                     </table>
 
-                     <div class="content-footer">
-                        <div class="page-text">
-                            当前显示 <span id="page-star">1</span> 到 <span id="page-end">9</span> 条，共 <span id="page-all">12</span> 条记录。
-                        </div>
-                        <div class="page-btn">
-                            <a href="" class="btn btn-yellow">上一页</a>
-                            <a href="" class="btn btn-yellow active">1</a>
-                            <a href="" class="btn btn-yellow">2</a>
-                            <a href="" class="btn btn-yellow">3</a>
-                            <a href="" class="btn btn-yellow">4</a>
-                            <a href="" class="btn btn-yellow">下一页</a>
-                        </div>
+                     <div class="content-footer box" style="position: relative;">
+                        
                     </div>
 
 
@@ -173,10 +167,10 @@
     </div>
      <div class="modal-log-box del-people-modal">
         <div class="modal-cont">
-            <p>确定移除该成员吗？</p>
+            <p>确定删除改音乐吗？</p>
            
             <div class="modal-btn-box">
-                <a href="#">确定</a>
+                <a href="#" class="padd-agree-btn">确定</a>
                  <a href="#" class="quit-modal">取消</a>
             </div>
         </div>
@@ -236,6 +230,10 @@
             });
 
             //点击弹窗
+              $("tbody").on("click",".user-edit",function (e) { 
+                   e.preventDefault();
+                   $("." + $(this).data("showmodal")).show();
+             })
             $(".user-edit").click(function (e) {  
                 //
                 e.preventDefault();
@@ -249,6 +247,12 @@
 
 
             // Membership.DataLoad();
+              Music_list.DataInit(1);
+
+             Music_list.searchSome();
+            // Music_list.Edit_agree();
+            Music_list.SongTypeList();
+            Music_list.Edit_agree();
         });
     </script>
 

@@ -57,6 +57,17 @@
             border: 1px solid #666;
             padding: 8px; margin-right: 8px;
        }
+       .img-logo-box>img {
+    display: block;
+    height: 100%;
+}
+.atte-info-con>li>b.fs-text-input {
+    display: block;
+    width: 60%;
+    height: 35px;
+   
+    overflow:hidden;
+}
     </style>
 </head>
 
@@ -79,44 +90,57 @@
                     <li style="align-items: flex-start;display:flex; margin:20px 0;">
                         <p>图片:</p>
                         <div class="img-logo-box">
-                            <img src="img/h5share_img_banner_list.jpg" alt="">
+                            <img src="img/h5share_img_banner_list.jpg"  alt=""  class="js_img_box">
+                            <input type="text"  class="js_img_box_ipt fs-input"  name="picUrl" value="" >
                         </div>
                         <div class="fam-set-img-box" style="margin-top:110px; margin-left:20px;">
-                            <input type="file" class="fs-img-file fs-input erroed">
+                            <input type="file"  class="fs-img-file js_file_upload  erroed">
                             <span> 上传图片</span>
                         </div>
                     </li>
                     <li style="align-items: center;">
                         <p>歌曲名:</p>
-                        <input class="fs-text-input  fs-input erroed" type="text" placeholder="输入家族ID">
+                        <input class="fs-text-input  fs-input erroed js_songName" name="songName" type="text" placeholder="输入歌曲名">
                     </li>
                      <li style="align-items: center;">
                         <p>歌手名:</p>
-                        <input class="fs-text-input  fs-input erroed" type="text" placeholder="输入家族ID">
+                        <input class="fs-text-input  fs-input erroed js_singer" name="singer" type="text" placeholder="输入歌手名">
                     </li>
                      <li style="align-items: center;">
                         <p>归类:</p>
-                        <select name="" id="" class="fs-text-input  fs-input erroed">
-                            <option value="">说唱</option>
-                              <option value="">流行</option>
-                        </select>
+                           <select name="classifyId"  class="classifyId fs-input fs-input-select"  id="js_song_type" class="select-search">
+                                        <option value="">所有</option>
+                                    </select>
                       
                     </li>
                           <li style="align-items: center;">
-                        <p>合同:</p>
-                        <b class="fs-text-input  fs-input erroed">sajdlksajdljasldjlksad</b>
+                        <p>音乐:</p>
+                        <b class="fs-text-input  fs-input erroed js_music_name" name='downUrl' value="" style="margin-left:10px;"></b>
                         <div class="fam-set-img-box">
-                            <input type="file" class="fs-img-file fs-input erroed">
-                            <span> 上传文件</span>
+                            <input type="file" class="fs-img-file js_file_upload  js_music_file  erroed">
+                            <audio id="audio" controls="" style="display: none;"></audio> 
+                            <span> 上传音乐文件</span>
                         </div>
                         
                     </li>
-                   
-
-                   
+                       </li>
+                          <li style="align-items: center;">
+                        <p>文件大小:</p>
+                        <b class="fs-text-input js_music_size  fs-input erroed" name="fileSize">0M</b>
+                       
+       
+                    </li>
+                      <li style="align-items: center;">
+                        <p>热度:</p>
+                        <input class="fs-text-input  js_hot fs-input erroed" name="hot" type="text" placeholder="输入热度">
+                    </li>
+                    <li style="align-items: center;">
+                        <p>时长:</p>
+                        <input class="fs-text-input  js_during fs-input erroed" name="during" disabled style="background:#fff;" type="text" placeholder="输入时长">
+                    </li>
                     <li>
                         <p></p>
-                          <a href="#" class="atte-submit fs-atte-submit" style="width:400px;">提交申请</a>
+                          <a href="#" id="all_submit_btn" class="atte-submit fs-atte-submit" style="width:400px;">提交</a>
                     </li>
 
                 </ul>
@@ -129,7 +153,20 @@
         </div>
         </div>
     </section>
+<div class="modal-info">
+         <div class="modal-content">
+            <div  class="other-modal-info">
+                <p class="info-text">
+                   
+                </p>
+                
+            </div>
+            
+         </div>
+        <div class="close-modal">
 
+        </div>
+</div>
     <!--弹窗-->
     <div class="modal-log-box add-robot-modal">
         <div class="modal-cont">
@@ -236,6 +273,10 @@
             });
 
             //点击弹窗
+            $("tbody").on("click",".user-edit",function () { 
+                   e.preventDefault();
+                   $("." + $(this).data("showmodal")).show();
+             })
             $(".user-edit").click(function (e) {
                 //
                 e.preventDefault();
@@ -249,6 +290,11 @@
 
 
             // Membership.DataLoad();
+           Music_list.AddMusicLoad();
+           Music_list.SongTypeList();
+           Music_list.uploadImg();
+          Music_list.MusicSubmit();
+      
         });
     </script>
 

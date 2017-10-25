@@ -225,8 +225,11 @@
 
             },
             li_length: null,
+            all_pages:null,
+            status:"0",
+            setTotalCount:null,
             pagesFuc: function (page_number, form) {
-
+                
                 fetch(server + "check/getCheckAnchorList", {
                     method: 'POST',
                     //      headers: { 'Accept': 'application/json',
@@ -243,6 +246,10 @@
                         //分页
                         var setTotalCount = li_leng;
                         var all_pages = parseInt(li_leng % 10 == 0 ? li_leng / 10 : li_leng / 10 + 1);
+
+                        Anchor_audit.all_pages=all_pages;
+                         Anchor_audit.setTotalCount=setTotalCount;
+                          Anchor_audit.DataLoad(page_number, form);
                         $('.content-footer').paging({
                             initPageNo: 1, // 初始页码
                             totalPages: all_pages, //总页数
@@ -250,9 +257,12 @@
                             slideSpeed: 600, // 缓动速度。单位毫秒
                             jump: false, //是否支持跳转
                             callback: function (page) { // 回调函数
-                                //刷新页面
-                                //console.log(page)
-                                Anchor_audit.DataLoad(page_number, form);
+                                  var form = new FormData();
+                                 form.append("status", Anchor_audit.status); // 
+                                //form.append("status", "0"); // 
+                                form.append("page", page); // 
+                                Anchor_audit.DataLoad(page, form);
+                             
                             }
                         });
 
@@ -260,6 +270,29 @@
                     }
                 });
 
+            },
+            pagesInit:function(){
+                 $('.content-footer').paging({
+                            initPageNo: 1, // 初始页码
+                            totalPages: Anchor_audit.all_pages, //总页数
+                            totalCount: '合计' + Anchor_audit.setTotalCount + '条数据', // 条目总数
+                            slideSpeed: 600, // 缓动速度。单位毫秒
+                            jump: false, //是否支持跳转
+                            callback: function (page) { // 回调函数
+                                //刷新页面
+                                //console.log(page)
+                                var form = new FormData();
+                               
+
+
+                  
+
+                                form.append("status", Anchor_audit.status); // 
+                                //form.append("status", "0"); // 
+                                form.append("page", page); // 
+                                Anchor_audit.DataLoad(page, form);
+                            }
+                        });
             },
             DataInit: function (page_number) {
                 var form = new FormData();
@@ -269,6 +302,8 @@
                 form.append("status", "0"); // 
                 form.append("page", page_number); // 
                 this.pagesFuc(page_number, form);
+
+
             },
 
             DataLoad: function (page_number, form) {
@@ -352,7 +387,7 @@
                     e.preventDefault();
 
                     var status = $(this).data("item");
-
+                    Anchor_audit.status=status;
 
                     var form = new FormData();
 
@@ -513,6 +548,8 @@
 
             Anchor_audit.searchSome();
             Anchor_audit.Edit_agree();
+        //    Anchor_audit.pagesFuc();
+           Anchor_audit.pagesInit();
             // Anchor_audit.searchSome();
             // Anchor_audit.Edit_agree();
         });
